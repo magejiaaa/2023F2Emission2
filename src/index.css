@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 標籤應用 */
+@layer base {
+    body {
+        @apply bg-neutral-100;
+    }
+    h1 {
+        @apply text-base/[1.2] lg:text-[2rem]/[1.2] font-bold;
+    }
+}
+
+/* class name應用預設class */
+@layer components {
+    .change_nav {
+        @apply flex gap-5 mb-5;
+    }
+    .change_nav button {
+        @apply text-xl/[1.2] pb-3 text-lightGray-700 transition-all hover:text-darkBlue-400 hover:font-bold relative before:w-0 before:absolute before:h-[5px] before:bottom-0 before:transition-all before:bg-lightGray-700 before:block hover:before:w-full;
+    }
+    .change_nav button.active {
+        @apply font-bold text-black before:bg-darkBlue-400 before:w-full;
+    }
+}
+
+/* class name應用客製class */
+@layer utilities {
+
+}
