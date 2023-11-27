@@ -22,8 +22,12 @@ export default {
           400: '#DFA175'
         },
         'lightGray': {
+          400: '#E6E6E6',
           700: '#BFBFBF'
         }
+      },
+      backgroundImage: {
+        'arrowDown': "url('/src/assets/chevron-down.svg')" 
       }
     },
   },
