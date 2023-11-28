@@ -24,10 +24,28 @@
         @apply font-bold text-black before:bg-darkBlue-400 before:w-full;
     }
     .search {
-        @apply flex gap-5;
+        @apply flex gap-5 mb-10;
     }
-    .search button {
-        @apply px-3 py-1 rounded-lg min-w-[156px] bg-[right_12px_center] bg-arrowDown bg-no-repeat text-xl/[1.4] border-lightGray-400 border;
+    .search div {
+        @apply relative;
+    }
+    .search select {
+        @apply px-3 py-1 rounded-lg min-w-[156px] bg-[right_12px_center] bg-arrowDown bg-no-repeat text-xl/[1.4] border-lightGray-400 border hover:border-lightGray-700 transition-all appearance-none;
+    }
+    .search option {
+        @apply hover:bg-lightGray-400;
+    }
+    .search_list {
+        @apply absolute bg-white w-full rounded-lg border-darkBlue-400 border;
+    }
+    .search_list button {
+        @apply w-full px-5 py-1 text-left;
+    }
+    .party_box {
+        @apply flex;
+    }
+    .party_box span {
+        @apply w-6 h-6 flex items-center justify-center rounded-full text-white text-xs mr-3;
     }
 }
 
@@ -35,5 +53,16 @@
 @layer utilities {
     body {
         font-family: 'Noto Sans TC', sans-serif;
+    }
+    .search_list {
+        top: calc(100% + 4px);
+    }
+    .map svg g path {
+        fill: #84CB98;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .map g:hover path {
+        fill: #77B789;
     }
 }
