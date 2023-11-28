@@ -57,12 +57,18 @@
     .search_list {
         top: calc(100% + 4px);
     }
-    .map svg g path {
+    .map path {
         fill: #84CB98;
         transition: all 0.3s ease;
         cursor: pointer;
     }
     .map g:hover path {
         fill: #77B789;
+    }
+    #Taitung path, #Hualien path, #Hsinchu_County path, #Matsu path, #Kinmen path, #Miaoli path {
+        fill: #8894D8;
+    }
+    #Taitung:hover path, #Hualien:hover path, #Hsinchu_County:hover path, #Matsu:hover path, #Kinmen:hover path, #Miaoli:hover path {
+        fill: #7A85C2;
     }
 }
