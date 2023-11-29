@@ -598,6 +598,8 @@ export default {
             let newfilePath;
             selectedCountry.value = '';
             currentCountryList.value = '';
+            selectedVillage.value = '';
+            currentVillageList.value = '';
             if (newValue >= 0 && newValue < cityPath.length && newValue !== "") {
                 newfilePath = `${import.meta.env.VITE_FILE_URL}/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(${cityPath[newValue].name}).xls`;
                 handleRightReadFile(newfilePath);
