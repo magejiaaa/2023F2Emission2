@@ -9,18 +9,19 @@
                 <option value="">請選擇</option>
                 <option v-for="(item, index) in cityName" :key="index" :value="index">{{ item }}</option>
             </select>
-            <select name="township" id="township">
+            <select name="township" id="township" v-model="selectedCountry">
                 <option value="">請選擇</option>
                 <option v-for="(item, index) in currentCountryList" :key="index" :value="index">{{ item }}</option>
             </select>
             <select name="village" id="village">
                 <option value="">請選擇</option>
             </select>
-            <button class="flex px-3 py-1 bg-darkBlue-400 text-white gap-2 rounded-lg items-center hover:bg-blue-800 transition-all">清除
+            <button class="flex px-3 py-1 bg-darkBlue-400 text-white gap-2 rounded-lg items-center hover:bg-blue-800 transition-all" @click="clearSelect">清除
                 <img src="../assets/rotate-cw.svg" altvote_chartRef="">
             </button>
         </div>
         <div class="flex justify-between items-start">
+            <!-- 左側資料 -->
             <div class="bg-white p-5 rounded-lg">
                 <h3 class="text-xl/[1.2] font-bold mb-5">投票概況</h3>
                 <!-- 深藍 -->
@@ -46,7 +47,7 @@
                     <div class="space-y-2" v-if="show_defaultData">
                         <div class="party_box">
                             <span class="bg-green-400">3</span>
-                            <div class="w-[104px] relative after:block after:w-[2px] after:h-8 after:bg-green-400 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2">
+                            <div class="after:bg-green-400">
                                 <p class="font-bold">民主進步黨</p>
                                 <p class="text-xs">蔡英文｜賴清德</p>
                             </div>
@@ -57,7 +58,7 @@
                         </div>
                         <div class="party_box">
                             <span class="bg-blue-400">2</span>
-                            <div class="w-[104px] relative after:block after:w-[2px] after:h-8 after:bg-blue-400 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2">
+                            <div class="after:bg-blue-400">
                                 <p class="font-bold">中國國民黨</p>
                                 <p class="text-xs">韓國瑜｜張善政</p>
                             </div>
@@ -68,7 +69,7 @@
                         </div>
                         <div class="party_box">
                             <span class="bg-brown-400">1</span>
-                            <div class="w-[104px] relative after:block after:w-[2px] after:h-8 after:bg-brown-400 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2">
+                            <div class="after:bg-brown-400">
                                 <p class="font-bold">親民黨</p>
                                 <p class="text-xs">宋楚瑜｜余湘</p>
                             </div>
@@ -198,28 +199,31 @@
 
             </div>
             <!-- 右側 -->
-            <div class="max-w-[260px] space-y-5 flex-none">
-                <div class="p-5 rounded-lg bg-blue-200" v-if="!selectedCity && selectedCity !== 0">
+            <div class="space-y-5 flex-none">
+                <!-- 無選擇 -->
+                <div class="max-w-[260px] p-5 rounded-lg bg-darkBlue-200" v-if="!selectedCity && selectedCity !== 0">
                     <p class="flex gap-2 mb-2 font-bold text-xl"><img src="../assets/info.svg" alt="">小提示</p>
                     <p>點擊選擇縣市、區、村里，可查看選舉結果</p>
                     <img class="pt-[62px] mx-auto pb-[25px]" src="../assets/select_sample.png" alt="">
                 </div>
-                <div class="p-5 rounded-lg bg-blue-200" v-if="!selectedCity && selectedCity !== 0">
+                <div class="max-w-[260px] p-5 rounded-lg bg-darkBlue-200" v-if="!selectedCity && selectedCity !== 0">
                     <p class="flex gap-2 mb-2 font-bold text-xl"><img src="../assets/info.svg" alt="">小提示</p>
                     <p>點擊地圖查看縣市的選舉結果</p>
                     <img class="pt-[62px] mx-auto pb-[25px]" src="../assets/select_sample_2.png" alt="">
                 </div>
                 <!-- 如果有選擇地區 -->
-                <div class="px-5 py-3 rounded-lg bg-blue-200" v-if="selectedCity || selectedCity === 0">
+                <!-- 縣市 -->
+                <div class="px-5 py-3 rounded-lg border-2" v-if="selectedCity !== '' && right_party_data.length > 0"
+                    :class="{ 'border-green-400 bg-green-200': right_party_data[0].__EMPTY_3 > right_party_data[0].__EMPTY_2, 'border-blue-400 bg-blue-200': right_party_data[0].__EMPTY_3 < right_party_data[0].__EMPTY_2 }">
                     <p class="flex gap-2 mb-2 font-bold text-xl">{{ cityName[selectedCity] }}</p>
                     <div class="space-y-2" v-if="right_party_data.length > 0">
                         <div class="party_box">
-                            <span class="bg-green-400 flex-none">3</span>
-                            <div class="w-[104px] relative after:block after:w-[2px] after:h-8 after:bg-green-400 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2">
+                            <span class="bg-green-400">3</span>
+                            <div class="after:bg-green-400">
                                 <p class="font-bold">民主進步黨</p>
                                 <p class="text-xs">蔡英文｜賴清德</p>
                             </div>
-                            <div class="ml-5">
+                            <div class="ml-5 flex-none">
                                 <p class="font-bold">{{ (right_party_data[0].__EMPTY_3 / (right_party_data[0].__EMPTY_3 + right_party_data[0].__EMPTY_2 + right_party_data[0].__EMPTY_1) * 100).toFixed(2)
                                 }}%</p>
                                 <p class="text-xs">{{ show_right_party_data[0].__EMPTY_3 }} 票</p>
@@ -227,24 +231,69 @@
                         </div>
                         <div class="party_box">
                             <span class="bg-blue-400">2</span>
-                            <div class="w-[104px] relative after:block after:w-[2px] after:h-8 after:bg-blue-400 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2">
+                            <div class="after:bg-blue-400">
                                 <p class="font-bold">中國國民黨</p>
                                 <p class="text-xs">韓國瑜｜張善政</p>
                             </div>
-                            <div class="ml-5">
-                                <p class="font-bold">{{ (right_party_data[0].__EMPTY_2 / (right_party_data[0].__EMPTY_3 + right_party_data[0].__EMPTY_2 + right_party_data[0].__EMPTY_1) * 100).toFixed(2) }}%</p>
+                            <div class="ml-5 flex-none">
+                                <p class="font-bold">{{ (right_party_data[0].__EMPTY_2 / (right_party_data[0].__EMPTY_3 + right_party_data[0].__EMPTY_2 + right_party_data[0].__EMPTY_1) * 100).toFixed(2)
+                                }}%</p>
                                 <p class="text-xs">{{ show_right_party_data[0].__EMPTY_2 }} 票</p>
                             </div>
                         </div>
                         <div class="party_box">
                             <span class="bg-brown-400">1</span>
-                            <div class="w-[104px] relative after:block after:w-[2px] after:h-8 after:bg-brown-400 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2">
+                            <div class="after:bg-brown-400">
                                 <p class="font-bold">中國國民黨</p>
                                 <p class="text-xs">宋楚瑜｜余湘</p>
                             </div>
-                            <div class="ml-5">
-                                <p class="font-bold">{{ (right_party_data[0].__EMPTY_1 / (right_party_data[0].__EMPTY_3 + right_party_data[0].__EMPTY_2 + right_party_data[0].__EMPTY_1) * 100).toFixed(2) }}%</p>
+                            <div class="ml-5 flex-none">
+                                <p class="font-bold">{{ (right_party_data[0].__EMPTY_1 / (right_party_data[0].__EMPTY_3 + right_party_data[0].__EMPTY_2 + right_party_data[0].__EMPTY_1) * 100).toFixed(2)
+                                }}%</p>
                                 <p class="text-xs">{{ show_right_party_data[0].__EMPTY_1 }} 票</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 鄉鎮 -->
+                <div class="px-5 py-3 rounded-lg border-2" v-if="selectedCountry === 0 || right_country_data.length > 0"
+                    :class="{ 'border-green-400 bg-green-200': right_country_data[0].__EMPTY_3 > right_country_data[0].__EMPTY_2, 'border-blue-400 bg-blue-200': right_country_data[0].__EMPTY_3 < right_country_data[0].__EMPTY_2 }">
+                    <p class="flex gap-2 mb-2 font-bold text-xl">{{ currentCountryList[selectedCountry] }}</p>
+                    <div class="space-y-2" v-if="right_country_data.length > 0">
+                        <div class="party_box">
+                            <span class="bg-green-400">3</span>
+                            <div class="after:bg-green-400">
+                                <p class="font-bold">民主進步黨</p>
+                                <p class="text-xs">蔡英文｜賴清德</p>
+                            </div>
+                            <div class="ml-5 flex-none">
+                                <p class="font-bold">{{ (right_country_data[0].__EMPTY_3 / (right_country_data[0].__EMPTY_3 + right_country_data[0].__EMPTY_2 + right_country_data[0].__EMPTY_1) * 100).toFixed(2)
+                                }}%</p>
+                                <p class="text-xs">{{ show_right_country_data[0].__EMPTY_3 }} 票</p>
+                            </div>
+                        </div>
+                        <div class="party_box">
+                            <span class="bg-blue-400">2</span>
+                            <div class="after:bg-blue-400">
+                                <p class="font-bold">中國國民黨</p>
+                                <p class="text-xs">韓國瑜｜張善政</p>
+                            </div>
+                            <div class="ml-5 flex-none">
+                                <p class="font-bold">{{ (right_country_data[0].__EMPTY_2 / (right_country_data[0].__EMPTY_3 + right_country_data[0].__EMPTY_2 + right_country_data[0].__EMPTY_1) * 100).toFixed(2)
+                                }}%</p>
+                                <p class="text-xs">{{ show_right_country_data[0].__EMPTY_2 }} 票</p>
+                            </div>
+                        </div>
+                        <div class="party_box">
+                            <span class="bg-brown-400">1</span>
+                            <div class="after:bg-brown-400">
+                                <p class="font-bold">中國國民黨</p>
+                                <p class="text-xs">宋楚瑜｜余湘</p>
+                            </div>
+                            <div class="ml-5 flex-none">
+                                <p class="font-bold">{{ (right_country_data[0].__EMPTY_1 / (right_country_data[0].__EMPTY_3 + right_country_data[0].__EMPTY_2 + right_country_data[0].__EMPTY_1) * 100).toFixed(2)
+                                }}%</p>
+                                <p class="text-xs">{{ show_right_country_data[0].__EMPTY_1 }} 票</p>
                             </div>
                         </div>
                     </div>
@@ -297,7 +346,8 @@ export default {
                         for (const key in item) {
                             if (Object.prototype.hasOwnProperty.call(item, key)) {
                                 if (typeof item[key] === 'string') {
-                                    item[key] = parseFloat(item[key].replace(/,/g, ''));
+                                    const parsedValue = parseFloat(item[key].replace(/,/g, ''));
+                                    item[key] = !isNaN(parsedValue) ? parsedValue : item[key]; // 若無法轉換成數字，保留原始值
                                 }
                             }
                         }
@@ -308,7 +358,8 @@ export default {
                 for (const key in data) {
                     if (Object.prototype.hasOwnProperty.call(data, key)) {
                         if (typeof data[key] === 'string') {
-                            data[key] = parseFloat(data[key].replace(/,/g, ''));
+                            const parsedValue = parseFloat(data[key].replace(/,/g, ''));
+                            data[key] = !isNaN(parsedValue) ? parsedValue : data[key]; // 若無法轉換成數字，保留原始值
                         }
                     }
                 }
@@ -366,19 +417,37 @@ export default {
         // 監控當前選擇縣市
         watch(selectedCity, (newValue, oldValue) => {
             let newfilePath;
+            selectedCountry.value = '';
             currentCountryList.value = '';
-            if (newValue >= 0 && newValue < cityName.value.length) {
-                newfilePath = `/public/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(${cityName.value[newValue]}).xls`;
+            if (newValue >= 0 && newValue < cityName.value.length && newValue !== "") {
+                newfilePath = `${import.meta.env.VITE_FILE_URL}/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(${cityName.value[newValue]}).xls`;
+                handleRightReadFile(newfilePath);
             } else {
                 // 处理超出范围的情况或默认情况
-                newfilePath = '/public/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(臺北市).xls';
+                newfilePath = `${import.meta.env.VITE_FILE_URL}/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(臺北市).xls`;
             }
-            handleRightReadFile(newfilePath); // 调用处理文件的函数
         });
 
 
-        // 當前選擇鄉鎮
+        // 當前選擇鄉鎮(index)
         const selectedCountry = ref("");
+        // 當前選擇鄉鎮的資料
+        const show_right_country_data = ref("");
+        const right_country_data = ref("");
+        // 監控當前選擇鄉鎮
+        watch(selectedCountry, (newValue, oldValue) => {
+            show_right_country_data.value = show_right_party_data.value.filter(item => item.data === currentCountryList.value[newValue]);
+            right_country_data.value = right_party_data.value.filter(item => item.data === currentCountryList.value[newValue]);
+            console.log(right_country_data);
+        });
+
+
+        // 清除所有選擇
+        function clearSelect() {
+            selectedCity.value = '';
+            selectedCountry.value = '';
+            currentCountryList.value = '';
+        }
 
         onMounted(() => {
             // 創立環形圖
@@ -403,7 +472,7 @@ export default {
 
             // 讀取excel檔案資料並替換【全台】資料
             async function handleReadFile() {
-                const filePath = '/public/總統-各投票所得票明細及概況(Excel檔)/總統-A05-1-候選人得票數一覽表(中　央).xls';
+                const filePath = `${import.meta.env.VITE_FILE_URL}/總統-各投票所得票明細及概況(Excel檔)/總統-A05-1-候選人得票數一覽表(中　央).xls`;
                 fetch(filePath)
                     .then(response => response.blob())
                     .then(blob => {
@@ -459,7 +528,11 @@ export default {
             party_chartRef,
             selectedCity,
             currentCountryList,
-            show_right_party_data
+            show_right_party_data,
+            right_country_data,
+            show_right_country_data,
+            selectedCountry,
+            clearSelect
         }
     }
 }

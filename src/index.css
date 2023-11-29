@@ -45,7 +45,10 @@
         @apply flex;
     }
     .party_box span {
-        @apply w-6 h-6 flex items-center justify-center rounded-full text-white text-xs mr-3;
+        @apply w-6 h-6 flex items-center justify-center rounded-full text-white text-xs mr-3 flex-none;
+    }
+    .party_box >div:nth-child(2) {
+        @apply w-[104px] relative after:block after:w-[2px] after:h-8 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2;
     }
 }
 
