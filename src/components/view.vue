@@ -368,10 +368,10 @@ export default {
             let newfilePath;
             currentCountryList.value = '';
             if (newValue >= 0 && newValue < cityName.value.length) {
-                newfilePath = `/src/assets/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(${cityName.value[newValue]}).xls`;
+                newfilePath = `/public/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(${cityName.value[newValue]}).xls`;
             } else {
                 // 处理超出范围的情况或默认情况
-                newfilePath = '/src/assets/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(臺北市).xls';
+                newfilePath = '/public/總統-各投票所得票明細及概況(Excel檔)/總統-A05-3-候選人得票數一覽表-各村里(臺北市).xls';
             }
             handleRightReadFile(newfilePath); // 调用处理文件的函数
         });
@@ -403,7 +403,7 @@ export default {
 
             // 讀取excel檔案資料並替換【全台】資料
             async function handleReadFile() {
-                const filePath = '/src/assets/總統-各投票所得票明細及概況(Excel檔)/總統-A05-1-候選人得票數一覽表(中　央).xls';
+                const filePath = '/public/總統-各投票所得票明細及概況(Excel檔)/總統-A05-1-候選人得票數一覽表(中　央).xls';
                 fetch(filePath)
                     .then(response => response.blob())
                     .then(blob => {
