@@ -61,17 +61,24 @@
         top: calc(100% + 4px);
     }
     .map path {
-        fill: #84CB98;
+        @apply fill-green-400;
         transition: all 0.3s ease;
         cursor: pointer;
     }
+    .map .active path {
+        @apply fill-green-600 stroke-green-400;
+        stroke-width: 2px;
+    }
     .map g:hover path {
-        fill: #77B789;
+        @apply fill-green-500;
     }
     #Taitung path, #Hualien path, #Hsinchu_County path, #Matsu path, #Kinmen path, #Miaoli path {
-        fill: #8894D8;
+        @apply fill-blue-400;
     }
     #Taitung:hover path, #Hualien:hover path, #Hsinchu_County:hover path, #Matsu:hover path, #Kinmen:hover path, #Miaoli:hover path {
-        fill: #7A85C2;
+        @apply fill-blue-500;
+    }
+    .active #Taitung path, .active #Hualien path, .active #Hsinchu_County path, .active #Matsu path, .active #Kinmen path, .active #Miaoli path {
+        @apply fill-blue-600 stroke-blue-400;
     }
 }
