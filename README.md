@@ -28,6 +28,6 @@ git push -u https://github.com/magejiaaa/2023F2Emission2.git gh-pages
 Vue 3 + Vite
 
 ### 第三方服務
-chart.js
-xlsx
-tailwindcss
+* chart.js
+* xlsx
+* tailwindcss
