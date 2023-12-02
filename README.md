@@ -10,7 +10,7 @@ The F2E 總統即時開票全台地圖
 gh-pages部署
 ```
 git init
-git add
+git add .
 git commit -m "deploy"
 git branch -M gh-pages
 git push -u https://github.com/magejiaaa/2023F2Emission2.git gh-pages
