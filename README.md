@@ -1,9 +1,33 @@
 ## [活動網址](https://2023.thef2e.com/news)
 
-# Vue 3 + Vite
+### 作品說明
+The F2E 總統即時開票全台地圖
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### 系統說明
+專案運行方式是使用 npm install、npm run dev
+打包 npm run build
 
-## Recommended IDE Setup
+gh-pages部署
+```
+git init
+git add
+git commit -m "deploy"
+git branch -M gh-pages
+git push -u https://github.com/magejiaaa/2023F2Emission2.git gh-pages
+```
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+---
+
+### 資料夾說明
+* public - excel資料、LOGO放置
+* src - 編譯資料
+  * assets - 圖片等
+  * components - 複用元件
+
+### 使用技術
+Vue 3 + Vite
+
+### 第三方服務
+chart.js
+xlsx
+tailwindcss
