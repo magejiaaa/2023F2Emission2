@@ -1,27 +1,29 @@
 <template>
-    <div class="px-12 py-10">
+    <div class="px-6 md:px-12 py-8 md:py-10">
         <nav class="change_nav">
             <button type="button" class="active">第15任 總統副總統大選</button>
             <button type="button">第10任 立法委員選舉</button>
         </nav>
         <div class="search">
-            <select name="city" id="city" v-model="selectedCity">
-                <option value="">請選擇</option>
-                <option v-for="(item, index) in cityPath" :key="index" :value="index">{{ item.name }}</option>
-            </select>
-            <select name="township" id="township" v-model="selectedCountry">
-                <option value="">請選擇</option>
-                <option v-for="(item, index) in currentCountryList" :key="index" :value="index">{{ item }}</option>
-            </select>
-            <select name="village" id="village" v-model="selectedVillage">
-                <option value="">請選擇</option>
-                <option v-for="(item, index) in currentVillageList" :key="index" :value="index">{{ item }}</option>
-            </select>
+            <div>
+                <select name="city" id="city" v-model="selectedCity">
+                    <option value="">請選擇</option>
+                    <option v-for="(item, index) in cityPath" :key="index" :value="index">{{ item.name }}</option>
+                </select>
+                <select name="township" id="township" v-model="selectedCountry">
+                    <option value="">請選擇</option>
+                    <option v-for="(item, index) in currentCountryList" :key="index" :value="index">{{ item }}</option>
+                </select>
+                <select name="village" id="village" v-model="selectedVillage">
+                    <option value="">請選擇</option>
+                    <option v-for="(item, index) in currentVillageList" :key="index" :value="index">{{ item }}</option>
+                </select>
+            </div>
             <button class="flex px-3 py-1 bg-darkBlue-400 text-white gap-2 rounded-lg items-center hover:bg-blue-800 transition-all" @click="clearSelect">清除
                 <img src="../assets/rotate-cw.svg" altvote_chartRef="">
             </button>
         </div>
-        <div class="flex justify-between items-start">
+        <div class="flex justify-between items-start gap-5 flex-wrap md:flex-nowrap">
             <!-- 左側資料 -->
             <div class="bg-white p-5 rounded-lg">
                 <h3 class="text-xl/[1.2] font-bold mb-5">投票概況</h3>
@@ -345,11 +347,9 @@ export default {
             {
                 name: '雲林縣',
                 path: `
-                <g id="Yilan">
+                <g id="Yunlin">
                         <path
-                            d="M510 81.1364C510 86.1693 505.946 90.2871 500.99 90.2871H489.728C484.772 90.2871 480.718 86.1693 480.718 81.1364C480.718 76.1035 484.772 71.9857 489.728 71.9857H500.99C505.946 71.9857 510 76.1035 510 81.1364Z" />
-                        <path
-                            d="M374.654 189.005C371.571 189.005 366.947 187.793 364.415 186.251L361.002 184.268C358.36 182.726 356.268 179.091 356.268 176.007V153.095C356.268 150.011 358.25 146.045 360.562 144.173L386.654 123.244C388.966 121.371 392.93 118.287 395.242 116.304L440.161 80.2841C442.473 78.4115 444.454 79.2927 444.564 82.377L445.335 136.792C445.335 139.766 444.674 144.723 443.794 147.587L432.784 183.828C431.903 186.691 428.711 189.115 425.628 189.115H374.654V189.005Z" />
+                            d="M123.011 345.177C119.909 345.177 118.691 342.973 120.242 340.438L134.532 315.863C136.083 313.218 139.739 311.124 142.841 311.124H210.418C213.52 311.124 215.957 313.659 215.957 316.634V339.777C215.957 342.863 213.409 345.287 210.418 345.287H123.011V345.177Z" />
                     </g>
                 `
             },
@@ -378,10 +378,12 @@ export default {
             {
                 name: '宜蘭縣',
                 path: `
-                <g id="Yunlin">
-                        <path
-                            d="M123.011 345.177C119.909 345.177 118.691 342.973 120.242 340.438L134.532 315.863C136.083 313.218 139.739 311.124 142.841 311.124H210.418C213.52 311.124 215.957 313.659 215.957 316.634V339.777C215.957 342.863 213.409 345.287 210.418 345.287H123.011V345.177Z" />
-                    </g>
+                <g id="Yilan">
+                    <path
+                        d="M510 81.1364C510 86.1693 505.946 90.2871 500.99 90.2871H489.728C484.772 90.2871 480.718 86.1693 480.718 81.1364C480.718 76.1035 484.772 71.9857 489.728 71.9857H500.99C505.946 71.9857 510 76.1035 510 81.1364Z" />
+                    <path
+                        d="M374.654 189.005C371.571 189.005 366.947 187.793 364.415 186.251L361.002 184.268C358.36 182.726 356.268 179.091 356.268 176.007V153.095C356.268 150.011 358.25 146.045 360.562 144.173L386.654 123.244C388.966 121.371 392.93 118.287 395.242 116.304L440.161 80.2841C442.473 78.4115 444.454 79.2927 444.564 82.377L445.335 136.792C445.335 139.766 444.674 144.723 443.794 147.587L432.784 183.828C431.903 186.691 428.711 189.115 425.628 189.115H374.654V189.005Z" />
+                </g>
                 `
             },
             {
@@ -570,15 +572,13 @@ export default {
                             if (currentGroup) {
                                 right_party_data.value.push(currentGroup);
                             }
-
+                            // 移除地名的空格
                             right_party_data.value = right_party_data.value.map(item => ({
                                 ...item,
                                 data: item.data.replace(/　/g, ''),
                                 group: item.group ? item.group.map(subItem => ({ ...subItem, data: subItem.data.replace(/　/g, '') })) : []
                             }));
-                            // right_party_data.value = deleteUselessData
-                            //     .filter(item => item.data.trim() !== '') // 過濾出 item.data 不為空的對象
-                            //     .map(item => ({ ...item, data: item.data.replace(/　/g, '') })); // 移除空格
+
                             // 使用深層複製來賦值給 show_right_party_data.value
                             show_right_party_data.value = reactive(JSON.parse(JSON.stringify(right_party_data.value)));
                             // 第一行是總計所以移除

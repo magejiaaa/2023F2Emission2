@@ -31,3 +31,6 @@ Vue 3 + Vite
 * chart.js
 * xlsx
 * tailwindcss
+
+### 補充說明
+有空時再把重複元件拆解並完成專案QQ

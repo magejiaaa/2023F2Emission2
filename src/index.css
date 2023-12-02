@@ -18,16 +18,16 @@
         @apply flex gap-5 mb-5;
     }
     .change_nav button {
-        @apply text-xl/[1.2] pb-4 text-lightGray-700 transition-all hover:text-darkBlue-400 hover:font-bold relative before:w-0 before:absolute before:h-[5px] before:bottom-0 before:transition-all before:bg-lightGray-700 before:block hover:before:w-full;
+        @apply text-base md:text-xl/[1.2] pb-4 text-lightGray-700 transition-all hover:text-darkBlue-400 hover:font-bold relative before:w-0 before:absolute before:h-[5px] before:bottom-0 before:transition-all before:bg-lightGray-700 before:block hover:before:w-full;
     }
     .change_nav button.active {
         @apply font-bold text-black before:bg-darkBlue-400 before:w-full;
     }
     .search {
-        @apply flex gap-5 mb-10;
+        @apply flex gap-5 mb-10 flex-wrap;
     }
-    .search div {
-        @apply relative;
+    .search > div {
+        @apply flex gap-5 flex-wrap;
     }
     .search select {
         @apply px-3 py-1 rounded-lg min-w-[156px] bg-[right_12px_center] bg-arrowDown bg-no-repeat text-xl/[1.4] border-lightGray-400 border hover:border-lightGray-700 transition-all appearance-none;
@@ -41,6 +41,12 @@
     .search_list button {
         @apply w-full px-5 py-1 text-left;
     }
+    .map {
+        @apply w-full flex justify-center;
+    }
+    .map svg {
+        @apply max-w-full;
+    }
     .party_box {
         @apply flex;
     }
@@ -48,7 +54,7 @@
         @apply w-6 h-6 flex items-center justify-center rounded-full text-white text-xs mr-3 flex-none;
     }
     .party_box >div:nth-child(2) {
-        @apply w-[104px] relative after:block after:w-[2px] after:h-8 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2;
+        @apply w-[104px] flex-none relative after:block after:w-[2px] after:h-8 after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2;
     }
 }
 
